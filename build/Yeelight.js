@@ -86,6 +86,16 @@ var Yeelight = function (_EventEmitter) {
       _this.log('connected to ' + _this.name + ' ' + _this.hostname + ':' + _this.port);
       _this.emit('connected');
     });
+
+    _this.socket.on('error', function (err) {
+      console.log('Error: ', err.stack);
+      setTimeout(function () {
+        _this.socket.connect(_this.port, _this.hostname, function () {
+          _this.log('connected to ' + _this.name + ' ' + _this.hostname + ':' + _this.port);
+          _this.emit('connected');
+        });
+      }, 1000);
+    });
     return _this;
   }
 

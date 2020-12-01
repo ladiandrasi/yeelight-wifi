@@ -50,6 +50,16 @@ export default class Yeelight extends EventEmitter {
       this.log(`connected to ${this.name} ${this.hostname}:${this.port}`);
       this.emit('connected');
     });
+
+    this.socket.on('error', (err) => {
+      console.log('Error: ', err.stack);
+      setTimeout(() => {
+        this.socket.connect(this.port, this.hostname, () => {
+          this.log(`connected to ${this.name} ${this.hostname}:${this.port}`);
+          this.emit('connected');
+        });
+      }, 1000);
+    });
   }
 
   /**
