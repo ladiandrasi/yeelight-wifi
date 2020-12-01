@@ -108,7 +108,7 @@ export default class Yeelight extends EventEmitter {
       if (typeof resp !== 'string') {
         this.log(`response is not string: ${resp}`);
         // eslint-disable-next-line no-param-reassign
-        resp = resp.toString();
+        return;
       }
       const json = JSON.parse(resp);
       const id = json.id;

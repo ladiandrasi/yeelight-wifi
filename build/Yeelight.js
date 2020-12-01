@@ -153,7 +153,8 @@ var Yeelight = function (_EventEmitter) {
       try {
         if (typeof resp !== 'string') {
           this.log('response is not string: ' + resp);
-          resp = resp.toString();
+          // eslint-disable-next-line no-param-reassign
+          return;
         }
         var json = JSON.parse(resp);
         var id = json.id;
